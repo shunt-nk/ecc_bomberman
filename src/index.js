@@ -1,5 +1,6 @@
-import { TemplateExample } from 'game/TemplateExample.js';
+import { BombermanGame } from "game/BombermanGame.js";
 
-window.addEventListener('load', () => {
-	new TemplateExample().start();
+window.addEventListener("load", () => {
+	new BombermanGame().start();
 });
+

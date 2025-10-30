@@ -1,5 +1,5 @@
-import { GamepadThumbstick } from 'engine/constants/control.js';
-import { Control } from 'game/constants/controls.js';
+import { GamepadThumbstick } from "engine/constants/control.js";
+import { Control } from "game/constants/controls.js";
 
 /**
  * Use this object to define the configured inputs for the available controls
@@ -18,13 +18,13 @@ export const controls = [
 			[Control.DOWN]: 13,
 		},
 		keyboard: {
-			[Control.LEFT]: 'ArrowLeft',
-			[Control.RIGHT]: 'ArrowRight',
-			[Control.UP]: 'ArrowUp',
-			[Control.DOWN]: 'ArrowDown',
-			[Control.ACTION]: 'Space',
-			[Control.START]: 'Enter',
-			[Control.ESCAPE]: 'Escape',
+			[Control.LEFT]: "ArrowLeft",
+			[Control.RIGHT]: "ArrowRight",
+			[Control.UP]: "ArrowUp",
+			[Control.DOWN]: "ArrowDown",
+			[Control.ACTION]: "Space",
+			[Control.START]: "Enter",
+			[Control.ESCAPE]: "Escape",
 		},
 	},
 	{
@@ -40,12 +40,13 @@ export const controls = [
 			[Control.DOWN]: 13,
 		},
 		keyboard: {
-			[Control.LEFT]: 'KeyF',
-			[Control.RIGHT]: 'KeyH',
-			[Control.UP]: 'KeyT',
-			[Control.DOWN]: 'KeyG',
-			[Control.ACTION]: 'Space',
-			[Control.START]: 'Enter',
+			[Control.LEFT]: "KeyF",
+			[Control.RIGHT]: "KeyH",
+			[Control.UP]: "KeyT",
+			[Control.DOWN]: "KeyG",
+			[Control.ACTION]: "Space",
+			[Control.START]: "Enter",
 		},
 	},
 ];
+
