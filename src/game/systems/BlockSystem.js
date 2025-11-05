@@ -6,6 +6,14 @@ import {
 } from "game/constants/LevelData.js";
 import { Block } from "game/entities/Block.js";
 
+function createSeededRandom(initialSeed = 123456789) {
+	let seed = initialSeed >>> 0; // 32bit にしておく
+	return function random() {
+		seed = (seed * 1664525 + 1013904223) >>> 0;
+		return seed / 0xffffffff;
+	};
+}
+
 export class BlockSystem {
 	blocks = [];
 
@@ -14,12 +22,15 @@ export class BlockSystem {
 		this.getStageCollisionTileAt = getStageCollisionTileAt;
 		this.addPowerup = addPowerup;
 
+		this.random = createSeededRandom(123456789);
+
 		this.addBlocksToStage();
 		this.addRandomPowerupsToBlocks();
 	}
+	// ★ シード付き乱数を作る関数（リニア合同法）
 
 	getRandomBlockIndex = () =>
-		Math.floor(Math.random() * (this.blocks.length - 1));
+		Math.floor(this.random() * (this.blocks.length - 1));
 
 	isBlockAllowedAt(cell) {
 		const isStartZone = playerStartCoords.some(
@@ -38,8 +49,8 @@ export class BlockSystem {
 	addBlocksToStage() {
 		while (this.blocks.length < stageData.maxBlocks) {
 			const cell = {
-				row: 1 + Math.floor(Math.random() * (stageData.tiles.length - 3)),
-				column: 2 + Math.floor(Math.random() * (stageData.tiles[0].length - 4)),
+				row: 1 + Math.floor(this.random() * (stageData.tiles.length - 3)),
+				column: 2 + Math.floor(this.random() * (stageData.tiles[0].length - 4)),
 			};
 
 			if (!this.isBlockAllowedAt(cell)) continue;

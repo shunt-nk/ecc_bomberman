@@ -34,7 +34,14 @@ export class Bomberman extends Entity {
 	availableBombs = this.bombAmount;
 	lastBombCell = undefined;
 
-	constructor(id, time, getStageCollisionTileAt, onBombPlaced, onEnd) {
+	constructor(
+		id,
+		time,
+		getStageCollisionTileAt,
+		onBombPlaced,
+		onEnd,
+		opts = {}
+	) {
 		super({
 			x: BombermanPlayerData[id].column * TILE_SIZE + HALF_TILE_SIZE,
 			y: BombermanPlayerData[id].row * TILE_SIZE + HALF_TILE_SIZE,
@@ -59,7 +66,9 @@ export class Bomberman extends Entity {
 		};
 
 		this.id = id;
-		this.color = BombermanPlayerData[id].color;
+		this.color = opts.color ?? BombermanPlayerData[id].color;
+		this.isLocal = opts.isLocal ?? true;
+
 		this.frames = getBombermanFrames(this.color);
 		this.startPosition = { ...this.position };
 		this.getStageCollisionTileAt = getStageCollisionTileAt;
@@ -210,6 +219,10 @@ export class Bomberman extends Entity {
 	}
 
 	getMovement() {
+		if (!this.isLocal) {
+			return [this.direction, { x: 0, y: 0 }];
+		}
+
 		if (control.isLeft(this.id)) {
 			return this.performWallCheck(Direction.LEFT);
 		} else if (control.isRight(this.id)) {
@@ -238,8 +251,9 @@ export class Bomberman extends Entity {
 
 	handleGeneralState = (time) => {
 		const [direction, velocity] = this.getMovement();
-		if (control.isControlPressed(this.id, Control.ACTION))
+		if (this.isLocal && control.isControlPressed(this.id, Control.ACTION)) {
 			this.handleBombPlacement(time);
+		}
 		this.animation = animations.moveAnimations[direction];
 		this.direction = direction;
 

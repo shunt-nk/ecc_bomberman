@@ -1,6 +1,10 @@
-import { pollGamepads, registerGamepadEvents, registerKeyEvents } from './inputHandler.js';
-import { getContext } from './context.js';
-import { Camera } from './Camera.js';
+import {
+	pollGamepads,
+	registerGamepadEvents,
+	registerKeyEvents,
+} from "./inputHandler.js";
+import { getContext } from "./context.js";
+import { Camera } from "./Camera.js";
 
 /**
  * Game time object to hold previous frames time information.
@@ -58,3 +62,4 @@ export class Game {
 		window.requestAnimationFrame(this.frame);
 	}
 }
+

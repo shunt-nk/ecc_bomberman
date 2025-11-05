@@ -24,16 +24,18 @@ export function drawText(context, text, baseX, baseY) {
 	let x = 0;
 
 	for (const char of text) {
-		if (char !== " ") {
-			drawFrame(
-				context,
-				fontImage,
-				frames.get(`alpha-${char}`),
-				baseX + x,
-				baseY
-			);
+		if (char === " ") {
+			x += 8;
+			continue;
 		}
 
+		const frame = frames.get(`alpha-${char}`);
+		if (!frame) {
+			x += 8;
+			continue;
+		}
+
+		drawFrame(context, fontImage, frame, baseX + x, baseY);
 		x += 8;
 	}
 }
